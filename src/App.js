@@ -7,12 +7,12 @@ import logo from './logo.svg';
 const baseUrl = process.env.NODE_ENV === 'production' ? 'https://frosty-kare-c2b900.netlify.com' : 'http://localhost:3000';
 
 const buildStravaUrl = () => {
-  const baseUrl = 'https://www.strava.com/oauth/authorize';
+  const stravaUrl = 'https://www.strava.com/oauth/authorize';
   const redirectUri = baseUrl + '/auth';
   const clientId = STRAVA_CLIENT_ID;
   const scope = 'read,activity:read';
 
-  return `${baseUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+  return `${stravaUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 };
 
 class App extends Component {
