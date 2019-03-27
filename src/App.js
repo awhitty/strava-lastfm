@@ -4,9 +4,11 @@ import Url from 'url-parse';
 import { STRAVA_CLIENT_ID } from './constants';
 import logo from './logo.svg';
 
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://frosty-kare-c2b900.netlify.com' : 'http://localhost:3000';
+
 const buildStravaUrl = () => {
   const baseUrl = 'https://www.strava.com/oauth/authorize';
-  const redirectUri = window.location.origin + '/auth';
+  const redirectUri = baseUrl + '/auth';
   const clientId = STRAVA_CLIENT_ID;
   const scope = 'read,activity:read';
 
@@ -20,7 +22,7 @@ class App extends Component {
     if (window.location.pathname === '/auth' && window.location.search) {
       const url = new Url(window.location, true);
       this.setState({ debug: 'Fetching token...' });
-      fetch('http://localhost:3000/.netlify/functions/new_token', {
+      fetch(baseUrl + '/.netlify/functions/new_token', {
         method: 'POST',
         body: JSON.stringify(url.query),
       })
