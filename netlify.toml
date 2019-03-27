@@ -1,0 +1,8 @@
+[Settings]
+ID = "cd8e1bad-afdc-40b8-b444-2ed734c9d717"
+
+[build]
+  base = "/"
+  publish = "build/"
+  command = "npm run build"
+  functions = "functions/"
