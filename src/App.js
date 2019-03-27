@@ -6,7 +6,7 @@ import logo from './logo.svg';
 
 const buildStravaUrl = () => {
   const baseUrl = 'https://www.strava.com/oauth/authorize';
-  const redirectUri = 'http://localhost:3000/auth';
+  const redirectUri = window.location.origin + '/auth';
   const clientId = STRAVA_CLIENT_ID;
   const scope = 'read,activity:read';
 
@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <>
         <div>
-          <img src={logo} />
+          <img src={logo} alt='Logo' />
         </div>
         <a href={buildStravaUrl()}>Start auth</a>
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
