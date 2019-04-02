@@ -5,21 +5,21 @@ import logo from './logo.svg';
 import { StravaV3 } from './strava';
 
 interface IAppState {
-  connected: boolean;
+  authenticated: boolean;
   data: any;
 }
 
 class App extends Component<{}, IAppState> {
   private stravaClient = new StravaV3();
 
-  state = { connected: false, data: null };
+  state = { authenticated: false, data: null };
 
   componentWillMount() {
     this.stravaClient.initialize().then(this.handleStravaAuth);
   }
 
   render() {
-    const buttons = this.state.connected ? (
+    const buttons = this.state.authenticated ? (
       <button onClick={this.fetchData}>Get data</button>
     ) : (
       <button onClick={this.startAuth}>Authenticate with Strava</button>
@@ -49,7 +49,7 @@ class App extends Component<{}, IAppState> {
   };
 
   private handleStravaAuth = () => {
-    this.setState({ connected: true });
+    this.setState({ authenticated: this.stravaClient.authenticated });
   };
 }
 
