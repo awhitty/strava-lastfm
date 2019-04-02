@@ -3,6 +3,7 @@ import Url from 'url-parse';
 
 import { STRAVA_CLIENT_ID } from './constants';
 import logo from './logo.svg';
+import axios from 'axios';
 
 const baseUrl =
   process.env.NODE_ENV === 'production'
@@ -23,18 +24,15 @@ class App extends Component {
 
   componentWillMount() {
     if (window.location.pathname === '/auth' && window.location.search) {
-      const url = new Url(window.location, true);
+      const url = new Url(window.location.toString(), true);
       this.setState({ debug: 'Fetching token...' });
-      fetch(baseUrl + '/api/strava', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(url.query),
-      })
-        .then(res => res.json())
+      axios
+        .post(baseUrl + '/api/strava', url.query)
         .then(res => {
-          this.setState({ debug: res });
+          this.setState({ debug: res.data });
+        })
+        .catch(err => {
+          this.setState({ debug: 'Had error' });
         });
     } else {
       this.setState({ debug: 'Start auth' });
