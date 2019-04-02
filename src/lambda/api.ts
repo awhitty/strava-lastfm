@@ -14,13 +14,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
-  res.end();
-});
-
-router.post('/strava', (req, res) => {
+router.post('/api/strava', (req, res) => {
   axios
     .post('https://www.strava.com/oauth/token', {
       client_id: STRAVA_CLIENT_ID,
@@ -37,7 +31,7 @@ router.post('/strava', (req, res) => {
     });
 });
 
-app.use('/.netlify/functions/api', router);
+app.use('/.netlify/functions/', router);
 
 export default app;
 export const handler = serverless(app);

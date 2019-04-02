@@ -1,55 +1,56 @@
 import React, { Component } from 'react';
-import Url from 'url-parse';
 
-import { STRAVA_CLIENT_ID } from './constants';
 import logo from './logo.svg';
-import axios from 'axios';
 
-const baseUrl =
-  process.env.NODE_ENV === 'production'
-    ? 'https://frosty-kare-c2b900.netlify.com'
-    : 'http://localhost:3000';
+import { StravaV3 } from './strava';
 
-const buildStravaUrl = () => {
-  const stravaUrl = 'https://www.strava.com/oauth/authorize';
-  const redirectUri = baseUrl + '/auth';
-  const clientId = STRAVA_CLIENT_ID;
-  const scope = 'read,activity:read';
+interface IAppState {
+  connected: boolean;
+  data: any;
+}
 
-  return `${stravaUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
-};
+class App extends Component<{}, IAppState> {
+  private stravaClient = new StravaV3();
 
-class App extends Component {
-  state = { debug: {} };
+  state = { connected: false, data: null };
 
   componentWillMount() {
-    if (window.location.pathname === '/auth' && window.location.search) {
-      const url = new Url(window.location.toString(), true);
-      this.setState({ debug: 'Fetching token...' });
-      axios
-        .post(baseUrl + '/api/strava', url.query)
-        .then(res => {
-          this.setState({ debug: res.data });
-        })
-        .catch(err => {
-          this.setState({ debug: 'Had error' });
-        });
-    } else {
-      this.setState({ debug: 'Start auth' });
-    }
+    this.stravaClient.initialize().then(this.handleStravaAuth);
   }
 
   render() {
+    const buttons = this.state.connected ? (
+      <button onClick={this.fetchData}>Get data</button>
+    ) : (
+      <button onClick={this.startAuth}>Authenticate with Strava</button>
+    );
+
     return (
       <>
         <div>
           <img src={logo} alt="Logo" />
         </div>
-        <a href={buildStravaUrl()}>Start auth</a>
+        {buttons}
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
       </>
     );
   }
+
+  private fetchData = () => {
+    this.stravaClient.getStats().then(this.receiveData);
+  };
+
+  private receiveData = (data: any) => {
+    this.setState({ data });
+  };
+
+  private startAuth = () => {
+    this.stravaClient.authenticate().then(this.handleStravaAuth);
+  };
+
+  private handleStravaAuth = () => {
+    this.setState({ connected: true });
+  };
 }
 
 export default App;
