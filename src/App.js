@@ -4,7 +4,10 @@ import Url from 'url-parse';
 import { STRAVA_CLIENT_ID } from './constants';
 import logo from './logo.svg';
 
-const baseUrl = process.env.NODE_ENV === 'production' ? 'https://frosty-kare-c2b900.netlify.com' : 'http://localhost:3000';
+const baseUrl =
+  process.env.NODE_ENV === 'production'
+    ? 'https://frosty-kare-c2b900.netlify.com'
+    : 'http://localhost:3000';
 
 const buildStravaUrl = () => {
   const stravaUrl = 'https://www.strava.com/oauth/authorize';
@@ -22,8 +25,11 @@ class App extends Component {
     if (window.location.pathname === '/auth' && window.location.search) {
       const url = new Url(window.location, true);
       this.setState({ debug: 'Fetching token...' });
-      fetch(baseUrl + '/.netlify/functions/new_token', {
+      fetch(baseUrl + '/api/strava', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(url.query),
       })
         .then(res => res.json())
@@ -39,7 +45,7 @@ class App extends Component {
     return (
       <>
         <div>
-          <img src={logo} alt='Logo' />
+          <img src={logo} alt="Logo" />
         </div>
         <a href={buildStravaUrl()}>Start auth</a>
         <pre>{JSON.stringify(this.state, null, 2)}</pre>

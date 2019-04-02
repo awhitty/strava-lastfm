@@ -8,6 +8,12 @@ ID = "cd8e1bad-afdc-40b8-b444-2ed734c9d717"
   functions = "lambda/"
 
 [[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
