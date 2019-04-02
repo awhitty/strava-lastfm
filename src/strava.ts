@@ -3,6 +3,7 @@ import Url from 'url-parse';
 import { STRAVA_CLIENT_ID } from './constants';
 import { BASE_URL, API } from './api';
 import axios from 'axios';
+import { DetailedAthlete } from './types/strava';
 
 const buildAuthUrl = () => {
   const stravaUrl = 'https://www.strava.com/oauth/authorize';
@@ -26,40 +27,19 @@ export function finalizeAuth() {
   return API.post<object, StravaAuthResponse>('/api/strava', url.query);
 }
 
-interface StravaAthlete {
-  id: number;
-  username: string;
-  resource_state: number;
-  firstname: string;
-  lastname: string;
-  city: string;
-  state: string;
-  country: string;
-  sex: string;
-  premium: boolean;
-  summit: boolean;
-  created_at: string;
-  updated_at: string;
-  badge_type_id: number;
-  profile_medium: string;
-  profile: string;
-  friend: any; // TODO: Figure out what these values are
-  follower: any; // TODO: Figure out what these values are
-}
-
 interface StravaAuthResponse {
   token_type: string;
   expires_at: number;
   expires_in: number;
   refresh_token: string;
   access_token: string;
-  athlete: StravaAthlete;
+  athlete: DetailedAthlete;
 }
 
 export class StravaV3 {
   private accessToken: string | null = null;
   public authenticated: boolean = false;
-  public athelete: StravaAthlete | null = null;
+  public athelete: DetailedAthlete | null = null;
 
   public initialize = async () => {
     if (shouldFinalizeAuth()) {
