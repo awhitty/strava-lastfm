@@ -1,19 +1,5 @@
-[Settings]
-ID = "cd8e1bad-afdc-40b8-b444-2ed734c9d717"
+# NOTE: This config file exists to trick netlify-lambda into building to
+# `packages/api/.lambda`. It shouldn't be used to add more config.
 
 [build]
-  base = "/"
-  publish = "packages/client/build/"
-  command = "lerna bootstrap && lerna run build"
-  functions = "packages/api/.lambda/"
-
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  functions = ".lambda/"

@@ -4,7 +4,7 @@ ID = "cd8e1bad-afdc-40b8-b444-2ed734c9d717"
 [build]
   base = "/"
   publish = "packages/client/build/"
-  command = "lerna bootstrap && lerna run build"
+  command = "lerna bootstrap && lerna run --parallel build"
   functions = "packages/api/.lambda/"
 
 [[redirects]]
