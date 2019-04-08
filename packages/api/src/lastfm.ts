@@ -1,8 +1,8 @@
 import * as express from 'express';
-import LastfmAPI from 'lastfmapi';
+import * as LastfmAPI from 'lastfmapi';
 import * as util from 'util';
 
-import { BASE_URL } from '../constants';
+import { BASE_URL } from './constants';
 
 const lfm = new LastfmAPI({
   api_key: process.env.LAST_FM_API_KEY,

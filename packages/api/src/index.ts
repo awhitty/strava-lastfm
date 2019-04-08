@@ -1,7 +1,7 @@
 require('dotenv/config');
 
 import * as bodyParser from 'body-parser';
-import express from 'express';
+import * as express from 'express';
 
 import * as strava from './strava';
 import * as lastfm from './lastfm';

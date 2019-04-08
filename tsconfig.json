@@ -1,25 +1,19 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./.tsbuild",
-    "sourceMap": true,
-    "declaration": false,
     "module": "commonjs",
-    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": ["node_modules/@types", "src/@types"],
-    "jsx": "preserve",
-    "lib": ["es2017", "dom"],
-    "strict": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    "target": "es6",
+    "sourceMap": true,
+    "lib": [
+      "es6"
+    ],
   },
-  "files": ["./src/routes/index.ts"]
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

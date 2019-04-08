@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "run-p -l start:**",
+    "start:tsc": "tsc --watch",
+    "start:nodemon": "nodemon ./dist/index.js",
+    "build": "netlify-lambda --config webpack.lambda.js build lambda"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "lastfmapi": "^0.1.1",
+    "netlify-lambda": "^1.4.3",
+    "nodemon": "^1.18.10",
+    "npm-run-all": "^4.1.5",
+    "serverless-http": "^1.9.1",
+    "typescript": "^3.4.2"
+  }
+}

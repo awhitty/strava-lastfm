@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as express from 'express';
 
-import { STRAVA_CLIENT_ID } from '../constants';
+import { STRAVA_CLIENT_ID } from './constants';
 
 export const registerRoutes = (router: express.Router) => {
   router.post('/api/strava', (req, res) => {
