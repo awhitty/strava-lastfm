@@ -19,7 +19,11 @@ const respondAuthUrl = (req: express.Request, res: express.Response) => {
 };
 
 const handleAuthCallback = (req: express.Request, res: express.Response) => {
-  const token = req.query.token;
+  res.sendStatus(200);
+};
+
+const handleAuthFinalize = (req: express.Request, res: express.Response) => {
+  const token = req.body.token;
   lfm.authenticate(token, (err: any, session: object | null) => {
     if (err) {
       res.status(500).json(util.inspect(err));
@@ -32,4 +36,5 @@ const handleAuthCallback = (req: express.Request, res: express.Response) => {
 export const registerRoutes = (router: express.Router) => {
   router.get('/api/lastfm/auth/url', respondAuthUrl);
   router.get(LAST_FM_CALLBACK_URL, handleAuthCallback);
+  router.post('/api/lastfm/auth/finalize', handleAuthFinalize);
 };
