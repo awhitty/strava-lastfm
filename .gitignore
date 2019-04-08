@@ -23,7 +23,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# netlify
+# custom
 .env
 .netlify
-/lambda
+/.lambda
+/.tsbuild

@@ -1,3 +1,3 @@
 module.exports = {
-  externals: ['express'],
+  externals: ['express', 'lastfmapi'],
 }

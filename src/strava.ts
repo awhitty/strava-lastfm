@@ -1,7 +1,7 @@
 import Url from 'url-parse';
 
-import { STRAVA_CLIENT_ID } from './constants';
-import { BASE_URL, API } from './api';
+import { STRAVA_CLIENT_ID, BASE_URL } from './constants';
+import { API } from './api';
 import axios from 'axios';
 import { DetailedAthlete } from './types/strava';
 
