@@ -1,12 +1,12 @@
-import 'dotenv/config';
+require('dotenv/config');
 
 import * as bodyParser from 'body-parser';
-import * as express from 'express';
+import express from 'express';
 
 import * as strava from './strava';
 import * as lastfm from './lastfm';
 
-const app = express() as express.Application;
+const app = express();
 const router: express.Router = express.Router();
 
 app.use(bodyParser.json());

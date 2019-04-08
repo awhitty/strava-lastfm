@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as LastfmAPI from 'lastfmapi';
+import LastfmAPI from 'lastfmapi';
 import * as util from 'util';
 
 import { BASE_URL } from '../constants';
