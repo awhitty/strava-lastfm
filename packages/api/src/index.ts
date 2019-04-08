@@ -11,6 +11,7 @@ const router: express.Router = express.Router();
 
 app.use(bodyParser.json());
 app.use('/.netlify/functions/', router);
+app.use('/', router);
 
 strava.registerRoutes(router);
 lastfm.registerRoutes(router);
